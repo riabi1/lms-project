@@ -258,7 +258,7 @@ require __DIR__ . '/auth.php';
     Route::post('/update/admin/{id}', 'UpdateAdmin')->name('update.admin');
     Route::get('/delete/admin/{id}', 'DeleteAdmin')->name('delete.admin');
   });
-}); // End Admin Group Middleware 
+ // End Admin Group Middleware 
 
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
