@@ -10,7 +10,7 @@
               </g>
             </svg>
           </div>
-          <h4 class="counter__title counter text-color-2">7520</h4>
+          <h4 class="counter__title counter text-color-2">0</h4>
           <p class="counter__meta">expert instructors</p>
         </div><!-- end counter-item -->
       </div><!-- end col-lg-3 -->

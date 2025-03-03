@@ -1,4 +1,4 @@
-<section class="subscriber-area pt-60px pb-60px bg-gray position-relative overflow-hidden">
+<!-- <section class="subscriber-area pt-60px pb-60px bg-gray position-relative overflow-hidden">
     <span class="stroke-shape stroke-shape-1"></span>
     <span class="stroke-shape stroke-shape-2"></span>
     <span class="stroke-shape stroke-shape-3"></span>
@@ -12,8 +12,8 @@
                     <h5 class="ribbon ribbon-lg mb-2">Newsletter</h5>
                     <h2 class="section__title mb-1">Subscribe to newsletter</h2>
                     <p class="section__desc">Stay in the know on new free e-book</p>
-                </div><!-- end section-heading -->
-            </div><!-- end col-lg-5 -->
+                </div>
+            </div>
             <div class="col-lg-5 ml-auto">
                 <form method="post" class="subscriber-form">
                     <div class="input-group">
@@ -26,7 +26,7 @@
                         <i class="la la-lock mr-1"></i>Your information is safe with us! unsubscribe anytime.
                     </p>
                 </form>
-            </div><!-- end col-lg-6 -->
-        </div><!-- end row -->
-    </div><!-- end container -->
-</section><!-- end subscriber-area -->
+            </div>
+        </div>
+    </div>
+</section> -->

@@ -17,6 +17,23 @@ use Carbon\Carbon;
 
 class IndexController extends Controller
 {
+
+  public function index()
+  {
+    // Get count of instructors (users with role 'instructor')
+    $instructorCount = User::where('role', 'instructor')
+      ->where('status', '1') // Only active instructors
+      ->count();
+
+    // You might want to add these other commonly used data for your homepage
+    $categories = Category::latest()->limit(6)->get();
+    $featuredCourses = Course::where('featured', '1')
+      ->where('status', '1')
+      ->limit(6)
+      ->get();
+
+    return view('frontend.index', compact('instructorCount', 'categories', 'featuredCourses'));
+  }
     public function CourseDetails($id,$slug){
 
         $course = Course::find($id);

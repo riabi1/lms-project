@@ -31,7 +31,7 @@
                     </div><!-- end card-body -->
                 </div><!-- end card -->
             </div><!-- end col-lg-4 -->
-            <div class="col-lg-4 responsive-column-half">
+            <!-- <div class="col-lg-4 responsive-column-half">
                 <div class="card card-item hover-s text-center">
                     <div class="card-body">
                         <img src="images/img-loading.png" data-src="{{ asset('frontend/images/small-img-4.jpg') }}" alt="card image" class="img-fluid rounded-full lazy">
@@ -39,10 +39,10 @@
                         <p class="card-text">Get unlimited access to 5,000+ of Aduca's top courses for your team</p>
                         <div class="btn-box mt-20px">
                             <a href="for-business.html" class="btn theme-btn theme-btn-sm theme-btn-white lh-30"><i class="la la-briefcase mr-1"></i>Get aduca for business</a>
-                        </div><!-- end btn-box -->
-                    </div><!-- end card-body -->
-                </div><!-- end card -->
-            </div><!-- end col-lg-4 -->
-        </div><!-- end row -->
-    </div><!-- end container -->
-</section><!-- end get-started-area -->
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</section>
