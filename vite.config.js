@@ -23,4 +23,9 @@ export default defineConfig({
 
 
     ],
+    resolve: {
+        alias: {
+            '@amcharts': '/node_modules/@amcharts/amcharts5'
+        }},
 });
+

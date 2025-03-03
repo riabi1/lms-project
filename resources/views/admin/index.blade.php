@@ -1,243 +1,279 @@
 @extends('admin.admin_dashboard')
 @section('admin')
 
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+    body, .card, .card-title, .card-text, small {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+    }
+    h5.card-title {
+        font-weight: 600;
+        color: #ffffff; /* Blanc pour contraste sur dégradé */
+    }
+    /* Conteneur global pour les stats */
+    .stats-container {
+        background: linear-gradient(135deg, #5a7db5, #3e5f9c);
+        padding: 30px 20px;
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        margin-bottom: 40px;
+    }
+    .stats-header {
+        color: white;
+        margin-bottom: 20px;
+    }
+    .stats-header h2 {
+        font-size: 2rem;
+        margin: 0;
+        display: flex;
+        align-items: center;
+    }
+    .stats-header i {
+        margin-right: 15px;
+        font-size: 2.5rem;
+    }
+    /* Cartes améliorées */
+    .card {
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 249, 252, 0.9));
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+    }
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    .card-icon {
+        width: 70px;
+        background: rgba(255, 255, 255, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 1px solid rgba(224, 224, 224, 0.5);
+        transition: transform 0.3s ease;
+    }
+    .card:hover .card-icon {
+        transform: scale(1.1);
+    }
+    .card-content {
+        padding: 20px;
+        flex-grow: 1;
+        color: #2c3e50; /* Gris foncé pour texte sur fond clair */
+    }
+    .card-content h5 {
+        margin: 0 0 8px 0;
+        font-size: 1.2rem;
+        color: inherit; /* Hérite de la couleur définie dans .card */
+    }
+    .card-content .display-6 {
+        margin: 0;
+        font-size: 2.5rem;
+        line-height: 1;
+    }
+    .card-content small {
+        display: block;
+        color: #555555;
+        font-size: 0.9rem;
+        margin-top: 5px;
+    }
+    /* Graphiques */
+    .chart-card {
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        background: #ffffff;
+        padding: 20px;
+    }
+    #popularCoursesChart {
+        max-height: 500px;
+    }
+</style>
+
 <div class="page-content">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
-       <div class="col">
-         <div class="card radius-10 border-start border-0 border-4 border-info">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <p class="mb-0 text-secondary">Total Orders</p>
-                        <h4 class="my-1 text-info">4805</h4>
-                        <p class="mb-0 font-13">+2.5% from last week</p>
-                    </div>
-                    <div class="widgets-icons-2 rounded-circle bg-gradient-blues text-white ms-auto"><i class='bx bxs-cart'></i>
-                    </div>
-                </div>
-            </div>
-         </div>
-       </div>
-       <div class="col">
-        <div class="card radius-10 border-start border-0 border-4 border-danger">
-           <div class="card-body">
-               <div class="d-flex align-items-center">
-                   <div>
-                       <p class="mb-0 text-secondary">Total Revenue</p>
-                       <h4 class="my-1 text-danger">$84,245</h4>
-                       <p class="mb-0 font-13">+5.4% from last week</p>
-                   </div>
-                   <div class="widgets-icons-2 rounded-circle bg-gradient-burning text-white ms-auto"><i class='bx bxs-wallet'></i>
-                   </div>
-               </div>
-           </div>
+    <!-- Statistiques rapides dans un conteneur stylé -->
+    <div class="stats-container">
+        <div class="stats-header">
+            <h2><i class="bx bx-tachometer"></i> Tableau de bord Admin</h2>
         </div>
-      </div>
-      <div class="col">
-        <div class="card radius-10 border-start border-0 border-4 border-success">
-           <div class="card-body">
-               <div class="d-flex align-items-center">
-                   <div>
-                       <p class="mb-0 text-secondary">Bounce Rate</p>
-                       <h4 class="my-1 text-success">34.6%</h4>
-                       <p class="mb-0 font-13">-4.5% from last week</p>
-                   </div>
-                   <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class='bx bxs-bar-chart-alt-2' ></i>
-                   </div>
-               </div>
-           </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card radius-10 border-start border-0 border-4 border-warning">
-           <div class="card-body">
-               <div class="d-flex align-items-center">
-                   <div>
-                       <p class="mb-0 text-secondary">Total Customers</p>
-                       <h4 class="my-1 text-warning">8.4K</h4>
-                       <p class="mb-0 font-13">+8.4% from last week</p>
-                   </div>
-                   <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto"><i class='bx bxs-group'></i>
-                   </div>
-               </div>
-           </div>
-        </div>
-      </div> 
-    </div><!--end row-->
-
-    <div class="row">
-       <div class="col-12 col-lg-12 d-flex">
-          <div class="card radius-10 w-100">
-            <div class="card-header">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <h6 class="mb-0">Sales Overview</h6>
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="card d-flex flex-row h-100" style="color: #5a7db5;">
+                    <div class="card-icon" style="border-left: 5px solid #5a7db5;">
+                        <i class="bx bx-user-circle" style="font-size: 2.5rem; color: #5a7db5;"></i>
                     </div>
-                    <div class="dropdown ms-auto">
-                        <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="javascript:;">Action</a>
-                            </li>
-                            <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                            </li>
-                        </ul>
+                    <div class="card-content">
+                        <h5 class="card-title">Utilisateurs</h5>
+                        <p class="card-text display-6">{{ $totalUsers }}</p>
+                        <small>Instructeurs: {{ $totalInstructors }}</small>
+                        <small>Étudiants: {{ $totalStudents }}</small>
+                        <small>Nouveaux: {{ $newUsers }}</small>
                     </div>
                 </div>
             </div>
-              <div class="card-body">
-                <div class="d-flex align-items-center ms-auto font-13 gap-2 mb-3">
-                    <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #14abef"></i>Sales</span>
-                    <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #ffc107"></i>Visits</span>
+            <div class="col-md-3 mb-4">
+                <div class="card d-flex flex-row h-100" style="color: #f18786;">
+                    <div class="card-icon" style="border-left: 5px solid #f18786;">
+                        <i class="bx bx-book" style="font-size: 2.5rem; color: #f18786;"></i>
+                    </div>
+                    <div class="card-content">
+                        <h5 class="card-title">Cours</h5>
+                        <p class="card-text display-6">{{ $totalCourses }}</p>
+                        <small>Actifs: {{ $activeCourses }}</small>
+                    </div>
                 </div>
-                <div class="chart-container-1">
-                    <canvas id="chart1"></canvas>
-                  </div>
-              </div>
-              <div class="row row-cols-1 row-cols-md-3 row-cols-xl-3 g-0 row-group text-center border-top">
-                <div class="col">
-                  <div class="p-3">
-                    <h5 class="mb-0">24.15M</h5>
-                    <small class="mb-0">Overall Visitor <span> <i class="bx bx-up-arrow-alt align-middle"></i> 2.43%</span></small>
-                  </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card d-flex flex-row h-100" style="color: #ebba4d;">
+                    <div class="card-icon" style="border-left: 5px solid #ebba4d;">
+                        <i class="bx bx-cart" style="font-size: 2.5rem; color: #ebba4d;"></i>
+                    </div>
+                    <div class="card-content">
+                        <h5 class="card-title">Commandes</h5>
+                        <p class="card-text display-6">{{ $totalOrders }}</p>
+                        <small>En attente: {{ $pendingOrders }}</small>
+                    </div>
                 </div>
-                <div class="col">
-                  <div class="p-3">
-                    <h5 class="mb-0">12:38</h5>
-                    <small class="mb-0">Visitor Duration <span> <i class="bx bx-up-arrow-alt align-middle"></i> 12.65%</span></small>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="p-3">
-                    <h5 class="mb-0">639.82</h5>
-                    <small class="mb-0">Pages/Visit <span> <i class="bx bx-up-arrow-alt align-middle"></i> 5.62%</span></small>
-                  </div>
-                </div>
-              </div>
-          </div>
-       </div>
-       
-    </div><!--end row-->
-
-     <div class="card radius-10">
-        <div class="card-header">
-            <div class="d-flex align-items-center">
-                <div>
-                    <h6 class="mb-0">Recent Orders</h6>
-                </div>
-                <div class="dropdown ms-auto">
-                    <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="javascript:;">Action</a>
-                        </li>
-                        <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                        </li>
-                    </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card d-flex flex-row h-100" style="color: #5a7db5;">
+                    <div class="card-icon" style="border-left: 5px solid #5a7db5;">
+                        <i class="bx bx-gift" style="font-size: 2.5rem; color: #5a7db5;"></i>
+                    </div>
+                    <div class="card-content">
+                        <h5 class="card-title">Coupons</h5>
+                        <p class="card-text display-6">{{ $totalCoupons }}</p>
+                        <small>Actifs: {{ $activeCoupons }}</small>
+                    </div>
                 </div>
             </div>
         </div>
-             <div class="card-body">
-             <div class="table-responsive">
-               <table class="table align-middle mb-0">
-                <thead class="table-light">
-                 <tr>
-                   <th>Product</th>
-                   <th>Photo</th>
-                   <th>Product ID</th>
-                   <th>Status</th>
-                   <th>Amount</th>
-                   <th>Date</th>
-                   <th>Shipping</th>
-                 </tr>
-                 </thead>
-                 <tbody><tr>
-                  <td>Iphone 5</td>
-                  <td><img src="{{ asset('backend/assets/images/products/01.png') }}" class="product-img-2" alt="product img"></td>
-                  <td>#9405822</td>
-                  <td><span class="badge bg-gradient-quepal text-white shadow-sm w-100">Paid</span></td>
-                  <td>$1250.00</td>
-                  <td>03 Feb 2020</td>
-                  <td><div class="progress" style="height: 6px;">
-                        <div class="progress-bar bg-gradient-quepal" role="progressbar" style="width: 100%"></div>
-                      </div></td>
-                 </tr>
+    </div>
 
-                 <tr>
-                  <td>Earphone GL</td>
-                  <td><img src="{{ asset('backend/assets/images/products/02.png') }}" class="product-img-2" alt="product img"></td>
-                  <td>#8304620</td>
-                  <td><span class="badge bg-gradient-blooker text-white shadow-sm w-100">Pending</span></td>
-                  <td>$1500.00</td>
-                  <td>05 Feb 2020</td>
-                  <td><div class="progress" style="height: 6px;">
-                        <div class="progress-bar bg-gradient-blooker" role="progressbar" style="width: 60%"></div>
-                      </div></td>
-                 </tr>
-
-                 <tr>
-                  <td>HD Hand Camera</td>
-                  <td><img src="{{ asset('backend/assets/images/products/03.png') }}" class="product-img-2" alt="product img"></td>
-                  <td>#4736890</td>
-                  <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Failed</span></td>
-                  <td>$1400.00</td>
-                  <td>06 Feb 2020</td>
-                  <td><div class="progress" style="height: 6px;">
-                        <div class="progress-bar bg-gradient-bloody" role="progressbar" style="width: 70%"></div>
-                      </div></td>
-                 </tr>
-
-                 <tr>
-                  <td>Clasic Shoes</td>
-                  <td><img src="{{ asset('backend/assets/images/products/04.png') }}" class="product-img-2" alt="product img"></td>
-                  <td>#8543765</td>
-                  <td><span class="badge bg-gradient-quepal text-white shadow-sm w-100">Paid</span></td>
-                  <td>$1200.00</td>
-                  <td>14 Feb 2020</td>
-                  <td><div class="progress" style="height: 6px;">
-                        <div class="progress-bar bg-gradient-quepal" role="progressbar" style="width: 100%"></div>
-                      </div></td>
-                 </tr>
-                 <tr>
-                  <td>Sitting Chair</td>
-                  <td><img src="{{ asset('backend/assets/images/products/06.png') }}" class="product-img-2" alt="product img"></td>
-                  <td>#9629240</td>
-                  <td><span class="badge bg-gradient-blooker text-white shadow-sm w-100">Pending</span></td>
-                  <td>$1500.00</td>
-                  <td>18 Feb 2020</td>
-                  <td><div class="progress" style="height: 6px;">
-                        <div class="progress-bar bg-gradient-blooker" role="progressbar" style="width: 60%"></div>
-                      </div></td>
-                 </tr>
-                 <tr>
-                  <td>Hand Watch</td>
-                  <td><img src="{{ asset('backend/assets/images/products/05.png') }}" class="product-img-2" alt="product img"></td>
-                  <td>#8506790</td>
-                  <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Failed</span></td>
-                  <td>$1800.00</td>
-                  <td>21 Feb 2020</td>
-                  <td><div class="progress" style="height: 6px;">
-                        <div class="progress-bar bg-gradient-bloody" role="progressbar" style="width: 40%"></div>
-                      </div></td>
-                 </tr>
-                </tbody>
-              </table>
-              </div>
-             </div>
+    <!-- Graphiques -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-4">
+            <div class="chart-card">
+                <h5 class="card-title">Revenus mensuels (dernière année)</h5>
+                <canvas id="revenueChart"></canvas>
+            </div>
         </div>
-
-
-          
+        <div class="col-md-6 mb-4">
+            <div class="chart-card">
+                <h5 class="card-title">Cours les plus populaires</h5>
+                <canvas id="popularCoursesChart"></canvas>
+            </div>
+        </div>
+    </div>
 </div>
 
+<!-- Inclure Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Nouvelle palette de couleurs
+const primaryColor = '#5a7db5';
+const secondaryColor = '#f18786';
+const accentColor = '#ebba4d';
+const darkGray = '#2c3e50';
+const midGray = '#555555';
+const lightGray = '#e0e0e0';
+
+// Débogage des données
+console.log("Monthly Revenue Data:", @json($monthlyRevenue));
+console.log("Popular Courses Data:", @json($popularCourses));
+
+// Revenus mensuels (Chart.js Bar Chart)
+const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'];
+const revenueChart = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: {
+        labels: months,
+        datasets: [{
+            label: 'Revenus ($)',
+            data: @json(array_values($monthlyRevenue)),
+            backgroundColor: primaryColor,
+            borderColor: darkGray,
+            borderWidth: 1,
+            hoverBackgroundColor: '#3e5f9c',
+            hoverBorderColor: midGray
+        }]
+    },
+    options: {
+        responsive: true,
+        animation: {
+            duration: 1000,
+            easing: 'easeInOutQuad'
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                ticks: { color: midGray, font: { family: 'Open Sans' } }
+            },
+            x: {
+                grid: { display: false },
+                ticks: { color: midGray, font: { family: 'Open Sans' } }
+            }
+        },
+        plugins: {
+            legend: { labels: { color: midGray, font: { family: 'Open Sans' } } },
+            tooltip: {
+                backgroundColor: primaryColor,
+                titleColor: '#fff',
+                bodyColor: '#fff',
+                borderColor: lightGray,
+                borderWidth: 1
+            }
+        }
+    }
+});
+
+// Cours les plus populaires (Chart.js Doughnut Chart)
+const popularCoursesChart = new Chart(document.getElementById('popularCoursesChart'), {
+    type: 'doughnut',
+    data: {
+        labels: @json(array_keys($popularCourses)),
+        datasets: [{
+            label: 'Nombre de commandes',
+            data: @json(array_values($popularCourses)),
+            backgroundColor: [
+                primaryColor, secondaryColor, accentColor,
+                '#7a9ad1', '#f7a8a7', '#ffd374'
+            ],
+            borderColor: '#fff',
+            borderWidth: 3,
+            hoverOffset: 10,
+            weight: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+            duration: 1000,
+            easing: 'easeInOutQuad'
+        },
+        cutout: '50%',
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    color: midGray,
+                    padding: 15,
+                    boxWidth: 12,
+                    font: { size: 12, family: 'Open Sans' }
+                }
+            },
+            tooltip: {
+                backgroundColor: secondaryColor,
+                titleColor: '#fff',
+                bodyColor: '#fff',
+                borderColor: lightGray,
+                borderWidth: 1
+            }
+        }
+    }
+});
+</script>
 @endsection
