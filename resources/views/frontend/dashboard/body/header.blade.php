@@ -7,9 +7,9 @@
                         <div class="logo-box logo--box">
                             <a href="index.html" class="logo"><img src="{{ asset('frontend/images/logo.png') }}" alt="logo"></a>
                             <div class="user-btn-action">
-                                <div class="search-menu-toggle icon-element icon-element-sm shadow-sm mr-2" data-toggle="tooltip" data-placement="top" title="Search">
+                                <!-- <div class="search-menu-toggle icon-element icon-element-sm shadow-sm mr-2" data-toggle="tooltip" data-placement="top" title="Search">
                                     <i class="la la-search"></i>
-                                </div>
+                                </div> -->
                                 <div class="off-canvas-menu-toggle cat-menu-toggle icon-element icon-element-sm shadow-sm mr-2" data-toggle="tooltip" data-placement="top" title="Category menu">
                                     <i class="la la-th-large"></i>
                                 </div>
@@ -21,14 +21,13 @@
                         <div class="menu-wrapper">
                             <form method="post" class="mr-auto ml-0">
                                 <div class="form-group mb-0">
-                                    <input class="form-control form--control form--control-gray pl-3" type="text" name="search" placeholder="Search for anything">
-                                    <span class="la la-search search-icon"></span>
+                                    <!-- <input class="form-control form--control form--control-gray pl-3" type="text" name="search" placeholder="Search for anything">
+                                    <span class="la la-search search-icon"></span> -->
                                 </div>
                             </form>
                             <div class="nav-right-button d-flex align-items-center">
                                 <div class="user-action-wrap d-flex align-items-center">
-                                 
-                                   
+
     <div class="shop-cart wishlist-cart pr-3 mr-3 border-right border-right-gray">
         <ul>
             <li>
@@ -414,10 +413,10 @@
     <div class="mobile-search-form">
         <div class="d-flex align-items-center">
             <form method="post" class="flex-grow-1 mr-3">
-                <div class="form-group mb-0">
+                <!-- <div class="form-group mb-0">
                     <input class="form-control form--control pl-3" type="text" name="search" placeholder="Search for anything">
                     <span class="la la-search search-icon"></span>
-                </div>
+                </div> -->
             </form>
             <div class="search-bar-close icon-element icon-element-sm shadow-sm">
                 <i class="la la-times"></i>
