@@ -17,4 +17,4 @@
             </div><!-- end cat-btn-box -->
         </div><!-- end cta-content-wrap -->
     </div><!-- end container -->
-</section><!-- end cta-area -->
+</section>

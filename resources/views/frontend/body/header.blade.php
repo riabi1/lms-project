@@ -55,12 +55,7 @@ $setting = App\Models\SiteSetting::find(1);
               @else
               <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray">
                 <i class="la la-sign-in mr-1"></i>
-                <a href="{{ route('login') }}">Strudent Login</a>
-              </li>
-
-              <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray">
-                <i class="la la-sign-in mr-1"></i>
-                <a href="instructor/login">Instructor Login</a>
+                <a href="{{ route('login') }}">Student Login</a>
               </li>
 
               <li class="d-flex align-items-center">
@@ -128,12 +123,12 @@ $setting = App\Models\SiteSetting::find(1);
                   </li>
                 </ul>
               </div><!-- end menu-category -->
-              <!-- <form method="post">
+              <form method="post">
                 <div class="form-group mb-0">
-                  <input class="form-control form--control pl-3" type="text" name="search" placeholder="Search for anything">
-                  <span class="la la-search search-icon"></span>
+                  <!-- <input class="form-control form--control pl-3" type="text" name="search" placeholder="Search for anything">
+                  <span class="la la-search search-icon"></span> -->
                 </div>
-              </form> -->
+              </form>
               <nav class="main-menu">
                 <ul>
                   <li>
@@ -177,7 +172,7 @@ $setting = App\Models\SiteSetting::find(1);
                 </ul>
               </div><!-- end shop-cart -->
               <div class="nav-right-button">
-                <a href="admission.html" class="btn theme-btn d-none d-lg-inline-block"><i class="la la-user-plus mr-1"></i> Admission</a>
+                <a href="instructor/login" class="btn theme-btn d-none d-lg-inline-block"><i class="la la-user-plus mr-1"></i>Instructor</a>
               </div><!-- end nav-right-button -->
             </div><!-- end menu-wrapper -->
           </div><!-- end col-lg-10 -->
