@@ -6,17 +6,89 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; 
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Order;
+use App\Models\Payment; 
+use App\Models\Coupon;
+use App\Models\Review;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
  
 class AdminController extends Controller
 {
-    public function AdminDashboard(){
+  
+  public function AdminDashboard()
+    {
+        // Statistiques utilisateurs
+        $totalUsers = User::count();
+        $totalAdmins = User::where('role', 'admin')->count();
+        $totalInstructors = User::where('role', 'instructor')->count();
+        $totalStudents = User::where('role', 'user')->count();
+        $newUsers = User::where('created_at', '>=', now()->subMonth())->count();
 
-        return view('admin.index');
+        // Statistiques cours
+        $totalCourses = Course::count();
+        $activeCourses = Course::where('status', 1)->count();
+        $popularCourses = Course::withCount('orders')
+            ->orderBy('orders_count', 'desc')
+            ->take(5)
+            ->get()
+            ->pluck('orders_count', 'course_name')
+            ->toArray();
 
-    } // End Method 
+        // Statistiques commandes (via payments)
+        $totalOrders = Payment::count();
+        $pendingOrders = Payment::where('status', 'pending')->count();
+        $monthlyRevenue = Payment::where('created_at', '>=', now()->subYear())
+            ->selectRaw('order_month as month, SUM(total_amount) as revenue')
+            ->groupBy('month')
+            ->orderByRaw('FIELD(month, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")')
+            ->pluck('revenue', 'month')
+            ->toArray();
+
+        // Statistiques coupons
+        $totalCoupons = Coupon::count();
+        $activeCoupons = Coupon::where('status', 1)->where('coupon_validity', '>=', now())->count();
+
+        // Statistiques reviews
+        $totalReviews = Review::count();
+        $averageRating = Review::avg('rating') ?? 0;
+
+        return view('admin.index', compact(
+            'totalUsers', 'totalAdmins', 'totalInstructors', 'totalStudents', 'newUsers',
+            'totalCourses', 'activeCourses', 'popularCourses',
+            'totalOrders', 'pendingOrders', 'monthlyRevenue',
+            'totalCoupons', 'activeCoupons',
+            'totalReviews', 'averageRating'
+        ));
+    }
+
+    // Nouvelle méthode pour les mises à jour dynamiques
+    public function GetDynamicData()
+    {
+        $monthlyRevenue = Payment::where('created_at', '>=', now()->subYear())
+            ->selectRaw('order_month as month, SUM(total_amount) as revenue')
+            ->groupBy('month')
+            ->orderByRaw('FIELD(month, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")')
+            ->pluck('revenue', 'month')
+            ->toArray();
+
+        $popularCourses = Course::withCount('orders')
+            ->orderBy('orders_count', 'desc')
+            ->take(5)
+            ->get()
+            ->map(function ($course) {
+                return [
+                    'course_name' => $course->course_name,
+                    'orders_count' => $course->orders_count + rand(-5, 5), // Simulation de variation
+                ];
+            })->toArray();
+
+        return response()->json([
+            'monthlyRevenue' => $monthlyRevenue,
+            'popularCourses' => $popularCourses,
+        ]);
+    }// End Method 
 
     public function AdminLogout(Request $request) {
         Auth::guard('web')->logout();
