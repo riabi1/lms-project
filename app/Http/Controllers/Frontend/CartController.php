@@ -385,7 +385,7 @@ class CartController extends Controller
              $total_amount = round(Cart::total());
          }
 
-         \Stripe\Stripe::setApiKey('sk_test_51HIiGMJRm0mYnhwVoxZEMWF3EN98WzrxnBnHl0hIPqFqWkK26VIa5XxqZ2mGSzPm8mLUPqlIZo4gMbPy1wXFrU2M00VvhR0X0F');
+         \Stripe\Stripe::setApiKey('sk_test_51QyWZ7H6fbNCZW244Nl5xqGTmVECCnnKD3Qfg0rUwtmMIl0OgrekJt2nHaknXHL1DlDkliddTStLwZIAwWXcHPIT00ctlZuQgc');
 
          $token = $_POST['stripeToken'];
 

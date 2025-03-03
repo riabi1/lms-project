@@ -228,7 +228,7 @@
             </ul>
         </li>
 
-        <li>
+        <!-- <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class="bx bx-map-alt"></i>
                 </div>
@@ -248,7 +248,7 @@
                 </div>
                 <div class="menu-title">Support</div>
             </a>
-        </li>
+        </li> -->
     </ul>
     <!--end navigation-->
 </div>

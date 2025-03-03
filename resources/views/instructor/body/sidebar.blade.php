@@ -127,7 +127,7 @@
         </li>
       
      
-        <li class="menu-label">Charts & Maps</li>
+        <!-- <li class="menu-label">Charts & Maps</li>
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class="bx bx-line-chart"></i>
@@ -168,6 +168,6 @@
                 <div class="menu-title">Support</div>
             </a>
         </li>
-    </ul>
+    </ul> -->
     <!--end navigation-->
 </div>
