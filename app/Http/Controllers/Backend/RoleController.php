@@ -190,15 +190,20 @@ class RoleController extends Controller
     public function RolePermissionStore(Request $request){
 
         $data = array();
-        $permissions = $request->permission;
+   $permissions = $request->permission;
 
-        foreach ($permissions as $key => $item) {
-            $data['role_id'] = $request->role_id;
-            $data['permission_id'] = $item;
+if (!is_array($permissions) || empty($permissions)) {
+    return redirect()->back()->with([
+        'message' => 'Aucune permission sélectionnée',
+        'alert-type' => 'error'
+    ]);
+}
 
-            DB::table('role_has_permissions')->insert($data);
-        } // end foreach
-
+foreach ($permissions as $item) { 
+    $data['role_id'] = $request->role_id;
+    $data['permission_id'] = $item;
+    DB::table('role_has_permissions')->insert($data);
+}
 
         $notification = array(
             'message' => 'Role Permission Added Successfully',
